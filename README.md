@@ -111,53 +111,53 @@
 
 ### 信息查询功能
 
-- #### **书籍信息查询**    /books
-
-  - **根据图书编号模糊查询**    /findBybId
-
-    ​	请求方式：GET。入参：
-
-    ​		图书编号（bId）
-
-    ​	出参：
-
-    ​		{
-
-    ​			"bId":图书编号,
-
-    ​			"bName":书名,
-
-    ​			"author":作者,
-
-    ​			"pubComp":出版社,
-
-    ​			"pubDate":出版日期,
-
-    ​			"bCount":库存
-
-    ​		}
+- #### **书籍信息查询**
 
   - **根据书名模糊查询**    /findBybName
 
-    ​	请求方式：GET。入参：
+    ​	请求方式：GET。入参：bName
 
-    ​		图书编号（bId）
-
-    ​	出参：
+    ​		出参：
 
     ​		{
 
-    ​			"bId":图书编号,
+       		 "msg": "查询成功！",
 
-    ​			"bName":书名,
+    ​    		"data": [
 
-    ​			"author":作者,
+    ​    		    {
 
-    ​			"pubComp":出版社,
+    ​     		       "author": "罗贯中",
 
-    ​			"pubDate":出版日期,
+    ​    		        "pubComp": "人民文学出版社",
 
-    ​			"bCount":库存
+    ​    		        "pubDate": "2010-01-01",
+
+    ​    		        "bid": 3,
+
+    ​    		        "bcount": 2,
+
+    ​    		        "bname": "三国演义"
+
+       		     },
+
+     		       {
+
+     		           "author": "刘慈欣",
+
+     		           "pubComp": "重庆出版社",
+
+     		           "pubDate": "2008-01-01",
+
+    ​		            "bid": 4,
+
+    ​		            "bcount": 3,
+
+    ​		            "bname": "三体"	
+
+       		     }
+
+    ​		    ]	
 
     ​		}
 
@@ -309,7 +309,7 @@
 
 - #### 书籍信息管理    /books
 
-  - 查询所有书籍信息    /findAllBooks
+  - 查询所有书籍信息   /books/findAll
 
     ​	请求方式：GET。入参：无
 
@@ -317,23 +317,57 @@
 
     ​		{
 
-    ​			"bId":图书编号,
+    ​    		"msg": "查询成功！",
 
-    ​			"bName":书名,
+       		 "data": [
 
-    ​			"author":作者,
+    ​       	 	{
 
-    ​			"pubComp":出版社,
+    ​           		 "author": "吴承恩",
 
-    ​			"pubDate":出版日期,
+    ​           		 "pubComp": "浙江教育出版社",
 
-    ​			"bCount":库存
+    ​            		"pubDate": "2016-01-01",
+
+    ​            		"bid": 3,
+
+    ​           	 	"bname": "西游记",
+
+    ​            		"bcount": 1
+
+    ​        		}
+
+    ​    		]
 
     ​		}
 
-  - 插入书籍信息    /insertBooks
+  - 插入书籍信息    /books/insert
 
-    ------------------>
+    ​	请求方式：POST。入参：bName，author，pubComp，pubDate，bCount
+    
+    ​	出参：
+    
+    ​	{
+    
+       	 "msg": "插入成功！",
+    
+       	 "data": {
+    
+    ​       	 "author": "吴承恩",
+    
+    ​      	  "pubComp": "浙江教育出版社",
+    
+    ​      	  "pubDate": "2016",
+    
+    ​      	  "bid": 3,
+    
+    ​    	    "bname": "西游记",
+    
+    ​     	   "bcount": 1
+    
+      	  }	
+    
+    ​	}
 
 - #### 预定信息管理    /ordain
 
