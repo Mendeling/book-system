@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aichi.booksystem.mapper.ReadersMapper">
+
+<!--    插入读者信息-->
+    <insert id="insertReader" useGeneratedKeys="true" keyProperty="id">
+        insert into readers(id, name, gender) values (#{id}, #{name}, #{gender})
+    </insert>
+
+<!--    根据读者编号修改读者信息-->
+    <update id="setReaderById">
+        update readers set name=#{name}, gender=#{gender} where id=#{id}
+    </update>
+
+<!--    根据读者编号查询读者信息-->
+    <select id="getReaderById" resultType="com.aichi.booksystem.bean.Readers">
+        select * from readers where id=#{id}
+    </select>
+
+<!--    查询所有读者信息-->
+    <select id="getReaders" resultType="com.aichi.booksystem.bean.Readers">
+        select * from readers
+    </select>
+
+
+</mapper>

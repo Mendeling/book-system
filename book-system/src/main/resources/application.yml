@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/book_system?serverTimezone=UTC
+#    schema:
+#      - classpath:sql/book_system.sql
+#    initialization-mode: always
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
