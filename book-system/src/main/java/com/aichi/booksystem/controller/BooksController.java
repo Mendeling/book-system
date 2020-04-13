@@ -62,4 +62,18 @@ public class BooksController {
         return map;
     }
 
+    //根据作者模糊查询
+    @GetMapping("/books/findByAuthor")
+    public Map<String, Object> getBooksByAuthor(@RequestParam("author") String author){
+        Map map = new HashMap();
+        try{
+
+            map.put("msg", "查询成功！");
+            map.put("data", booksMapper.getBooksByAuthor(author));
+        } catch (Exception e) {
+            System.out.println(e);
+            map.put("msg", "查询失败！");
+        }
+        return map;
+    }
 }

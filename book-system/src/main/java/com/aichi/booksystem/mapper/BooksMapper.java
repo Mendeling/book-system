@@ -16,5 +16,9 @@ public interface BooksMapper {
     //查询所有书籍信息
     public List<Books> getBooks();
 
+    //根据书名模糊查询
     public List<Books> getBooksByName(String bName);
+
+    //根据作者模糊查询
+    public List<Books> getBooksByAuthor(String author);
 }

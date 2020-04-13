@@ -131,7 +131,7 @@
 
     ​    		        "pubComp": "人民文学出版社",
 
-    ​    		        "pubDate": "2010-01-01",
+    ​    		        "pubDate": "2010-01",
 
     ​    		        "bid": 3,
 
@@ -147,7 +147,7 @@
 
      		           "pubComp": "重庆出版社",
 
-    ​		           "pubDate": "2008-01-01",
+    ​		           "pubDate": "2008-01",
 
     ​		            "bid": 4,
 
@@ -163,26 +163,22 @@
 
   - **根据作者模糊查询**    /findByAuthor
 
-    ​	请求方式：GET。入参：
-
-    ​		作者（author）
+    ​	请求方式：GET。入参：author
 
     ​	出参：
 
     ​		{
-
-    ​			"bId":图书编号,
-
-    ​			"bName":书名,
-
-    ​			"author":作者,
-
-    ​			"pubComp":出版社,
-
-    ​			"pubDate":出版日期,
-
-    ​			"bCount":库存
-
+​			"msg": "查询成功！",
+    ​			"data": [
+​				{
+    ​					"author": "刘同",
+​					"pubComp": "北京联合出版有限公司",
+    ​					"pubDate": "2017-01",
+​					"bid": 5,
+    ​					"bname": "我在未来等你",
+​					"bcount": 1
+    ​				}
+​			]
     ​		}
 
 - #### **读者信息查询**    /readers/findById

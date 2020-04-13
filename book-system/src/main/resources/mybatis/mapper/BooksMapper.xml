@@ -6,7 +6,7 @@
 
     <!--    插入书籍信息-->
     <insert id="insertBook" useGeneratedKeys="true" keyProperty="bId">
-        insert into books(bId, bName, author, pubComp, pubDate, bCount) values (#{bId}, #{bName}, #{author}, #{pubComp}, #{pubDate, jdbcType=DATE}, #{bCount})
+        insert into books(bId, bName, author, pubComp, pubDate, bCount) values (#{bId}, #{bName}, #{author}, #{pubComp}, #{pubDate}, #{bCount})
     </insert>
 
     <!--    查询所有书籍信息-->
@@ -17,6 +17,11 @@
     <!--    根据书名模糊查询-->
     <select id="getBooksByName" resultType="com.aichi.booksystem.bean.Books">
         select * from books where bName like concat('%',#{bName},'%')
+    </select>
+
+    <!--    根据作者模糊查询-->
+    <select id="getBooksByAuthor" resultType="com.aichi.booksystem.bean.Books">
+        select * from books where author like concat('%',#{author},'%')
     </select>
 
 <!--    &lt;!&ndash;    根据读者编号修改读者信息&ndash;&gt;-->

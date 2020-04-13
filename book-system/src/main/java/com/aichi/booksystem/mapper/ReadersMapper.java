@@ -25,5 +25,4 @@ public interface ReadersMapper {
     //查询所有读者
     public List<Readers> getReaders();
 
-
 }

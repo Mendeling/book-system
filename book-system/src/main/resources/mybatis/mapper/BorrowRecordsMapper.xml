@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aichi.booksystem.mapper.BorrowRecordsMapper">
+<!--    建立借书记录-->
+    <insert id="borrowBooks" useGeneratedKeys="true" keyProperty="borrowId">
+        insert into borrowrecords(borrowId, bId, id, expReturnDate, borrowDate) values (#{borrowId}, #{bId}, #{id}, DATE_FORMAT(date_add(now(), interval 7 day),"%Y-%m-%d %T"), DATE_FORMAT(now(),"%Y-%m-%d %T"))
+    </insert>
+
+<!--    根据图书编号查看库存-->
+    <select id="getbCount" resultType="Integer">
+        select bCount from books where bId=#{bId}
+    </select>
+
+    <!--    查询借书未还次数-->
+    <select id="getBorrowCount" resultType="Integer">
+        select COUNT(*) from borrowrecords where id=#{id} and returnDate is null
+    </select>
+
+<!--    借书-->
+    <update id="setBooksCount">
+        update books set bCount=bCount-1 where bId=#{bId}
+    </update>
+
+<!--    还书-->
+    <update id="returnBooks">
+        update borrowrecords set returnDate=DATE_FORMAT(now(),"%Y-%m-%d %T") where borrowId=#{borrowId}
+    </update>
+</mapper>
