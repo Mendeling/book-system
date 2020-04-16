@@ -25,7 +25,7 @@ public class BooksController {
         try{
             booksMapper.insertBook(books);
             map.put("msg", "插入成功！");
-            map.put("data", books);
+            map.put("books", books);
         } catch (Exception e) {
             System.out.println(e);
             map.put("msg", "插入失败！");
@@ -40,7 +40,7 @@ public class BooksController {
         try{
 
             map.put("msg", "查询成功！");
-            map.put("data", booksMapper.getBooks());
+            map.put("books", booksMapper.getBooks());
         } catch (Exception e) {
             map.put("msg", "查询失败！");
         }
