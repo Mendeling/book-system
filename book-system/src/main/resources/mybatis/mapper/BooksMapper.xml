@@ -9,9 +9,22 @@
         insert into books(bId, bName, author, pubComp, pubDate, bCount) values (#{bId}, #{bName}, #{author}, #{pubComp}, #{pubDate}, #{bCount})
     </insert>
 
+    <!--    查询所有书籍数量-->
+    <select id="getBooksCount" resultType="Integer">
+        SELECT count(*) FROM books
+    </select>
+
     <!--    查询所有书籍信息-->
     <select id="getBooks" resultType="com.aichi.booksystem.bean.Books">
-        select * from books
+        select * from books limit ${(page - 1)*10},
+        <choose>
+            <when test="(count % 10 != 10) and (page == count / 10 + 1)">
+                ${count % 10}
+            </when>
+            <otherwise>
+                10
+            </otherwise>
+        </choose>
     </select>
 
     <!--    根据书名模糊查询-->
@@ -23,15 +36,5 @@
     <select id="getBooksByAuthor" resultType="com.aichi.booksystem.bean.Books">
         select * from books where author like concat('%',#{author},'%')
     </select>
-
-<!--    &lt;!&ndash;    根据读者编号修改读者信息&ndash;&gt;-->
-<!--    <update id="setReaderById">-->
-<!--        update readers set name=#{name}, gender=#{gender} where id=#{id}-->
-<!--    </update>-->
-
-
-
-
-
 
 </mapper>

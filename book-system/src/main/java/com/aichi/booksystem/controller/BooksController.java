@@ -3,11 +3,9 @@ package com.aichi.booksystem.controller;
 import com.aichi.booksystem.bean.Books;
 import com.aichi.booksystem.bean.Readers;
 import com.aichi.booksystem.mapper.BooksMapper;
+import com.aichi.booksystem.mapper.BorrowRecordsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,15 +31,17 @@ public class BooksController {
         return map;
     }
 
-    //查询所有书籍信息
+    //分页查询所有书籍信息
     @GetMapping("/books/findAll")
-    public Map<String, Object> getBooks(){
+    public Map<String, Object> getBooks(@RequestParam("page") Integer page){
         Map map = new HashMap();
         try{
 
             map.put("msg", "查询成功！");
-            map.put("books", booksMapper.getBooks());
+            map.put("books", booksMapper.getBooks(page, booksMapper.getBooksCount()));
+            map.put("total", booksMapper.getBooksCount());
         } catch (Exception e) {
+            System.out.println(e);
             map.put("msg", "查询失败！");
         }
         return map;
@@ -76,4 +76,5 @@ public class BooksController {
         }
         return map;
     }
+
 }

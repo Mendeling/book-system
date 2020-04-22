@@ -17,6 +17,31 @@ public class ReadersController {
     @Autowired
     ReadersMapper readersMapper;
 
+    //读者登录
+    @PostMapping("/readers/login")
+    public Map<String, Object> readerLogin(Readers readers){
+        Map map = new HashMap();
+        try {
+            if (readersMapper.getReaderById(readers.getId()) != null) {
+                String readerName = readersMapper.getReaderById(readers.getId()).getName();
+                if (readerName.equals(readers.getName())) {
+                    map.put("msg", "登录成功！");
+                    map.put("reader", readersMapper.getReaderById(readers.getId()));
+                }
+                else {
+                    map.put("msg", "登录失败，姓名与读者编号不符!");
+                }
+            }
+            else {
+                map.put("msg", "登录失败，姓名与读者编号不符或不存在读者信息！");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            map.put("msg", "操作失败！登录失败！");
+        }
+        return map;
+    }
+
     //插入读者信息
     @PostMapping("/readers/insert")
     public Map<String, Object> insertReader(Readers readers){

@@ -23,8 +23,41 @@
         update books set bCount=bCount-1 where bId=#{bId}
     </update>
 
+<!--    根据读者编号查询借书记录-->
+    <select id="getBorrowById" resultType="com.aichi.booksystem.bean.BorrowRecords">
+        select * from borrowrecords where id=#{id} limit ${(page - 1)*10}   ,
+        <choose>
+            <when test="(count % 10 != 10) and (page == count / 10 + 1)">
+                ${count % 10}
+            </when>
+            <otherwise>
+                10
+            </otherwise>
+        </choose>
+    </select>
+
 <!--    还书-->
 <update id="returnBooks">
         update borrowrecords set returnDate=DATE_FORMAT(now(),"%Y-%m-%d %T") where borrowId=#{borrowId}
     </update>
+
+<!--    根据借书编号查询图书编号-->
+    <select id="getBorrowIdByBooksId" resultType="Integer">
+        select bId from borrowrecords where borrowId=#{borrowId}
+    </select>
+
+    <!--    还书，书籍数量+1-->
+    <update id="addBooks">
+        update books set bCount=bCount+1 where bId=#{bId}
+    </update>
+
+<!--    根据结束编号查询借书记录-->
+    <select id="getBorrow" resultType="com.aichi.booksystem.bean.BorrowRecords">
+        select * from borrowrecords where borrowId=#{borrowId}
+    </select>
+
+<!--    根据读者编号查询借书次数-->
+    <select id="getBorrowCountById" resultType="Integer">
+        select count(*) from borrowrecords where id=#{id}
+    </select>
 </mapper>
